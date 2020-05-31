@@ -33,3 +33,11 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+var adam = new Manager("AdamMan", 1, "ad@am.com", "101");
+console.log(adam.getName(), adam.getId(), adam.getEmail(), adam.officeNumber, adam.getRole());
+var bob = new Engineer("BobEngi", 7, "Bob@Bob.Bob", "TheGitHub");
+console.log(bob.getName(), bob.getId(), bob.getEmail(), bob.getGithub(), bob.getRole());
+var carl = new Intern("CarlInt", 100, "Carl@Carl.edu", "School of School");
+console.log(carl.getName(), carl.getId(), carl.getEmail(), carl.getSchool(), carl.getRole());
