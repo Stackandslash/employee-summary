@@ -35,9 +35,77 @@ const render = require("./lib/htmlRenderer");
 // for the provided `render` function to work! ```
 
 
-var adam = new Manager("AdamMan", 1, "ad@am.com", "101");
-console.log(adam.getName(), adam.getId(), adam.getEmail(), adam.officeNumber, adam.getRole());
-var bob = new Engineer("BobEngi", 7, "Bob@Bob.Bob", "TheGitHub");
-console.log(bob.getName(), bob.getId(), bob.getEmail(), bob.getGithub(), bob.getRole());
-var carl = new Intern("CarlInt", 100, "Carl@Carl.edu", "School of School");
-console.log(carl.getName(), carl.getId(), carl.getEmail(), carl.getSchool(), carl.getRole());
+// var adam = new Manager("AdamMan", 1, "ad@am.com", "101");
+// console.log(adam.getName(), adam.getId(), adam.getEmail(), adam.getOfficeNumber(), adam.getRole());
+// var bob = new Engineer("BobEngi", 7, "Bob@Bob.Bob", "TheGitHub");
+// console.log(bob.getName(), bob.getId(), bob.getEmail(), bob.getGithub(), bob.getRole());
+// var carl = new Intern("CarlInt", 100, "Carl@Carl.edu", "School of School");
+// console.log(carl.getName(), carl.getId(), carl.getEmail(), carl.getSchool(), carl.getRole());
+
+let team = [];
+let namePrompt = {
+    type: "input",
+    message: "Name?",
+    name: "name"
+};
+let idPrompt = 
+{
+    type: "input",
+    message: "ID?",
+    name: "id"
+};
+
+recurringPrompt();
+
+
+function recurringPrompt(){
+inquirer
+  .prompt([
+    {
+      type: "list",
+      message: "What would you like to add?",
+      name: "role",
+      choices: ["Engineer", "Intern", "Done"]
+    }
+])
+    .then((response) =>{
+        switch (response.role) {
+            case "Engineer":
+                addEngineer();
+                break;
+            case "Intern":
+                addIntern();
+                break;
+            default:
+                complete();
+                break;
+        }
+
+    })
+}
+
+function addEngineer(){
+inquirer.prompt([namePrompt, idPrompt, {
+    type: "input",
+    message: "Github name?",
+    name: "github"
+}]).then( function(response){
+    console.log("Engineer", response.name, response.id, response.github)
+    recurringPrompt();
+})
+}
+
+function addIntern(){
+    inquirer.prompt([namePrompt, idPrompt, {
+        type: "input",
+        message: "School?",
+        name: "school"
+    }]).then( function(response){
+        console.log("Intern", response.name, response.id, response.school)
+        recurringPrompt();
+    })
+}
+
+function complete(){
+
+}
