@@ -54,8 +54,15 @@ let idPrompt =
     message: "ID?",
     name: "id"
 };
+let emailPrompt = 
+{
+    type: "input",
+    message: "Work email?",
+    name: "email"
+};
 
-recurringPrompt();
+addManager(); //This is our initial prompt, since each team needs one manager, and one only.
+
 
 
 function recurringPrompt(){
@@ -63,7 +70,7 @@ inquirer
   .prompt([
     {
       type: "list",
-      message: "What would you like to add?",
+      message: "What role would you like to add? Select one below, or select 'done' to export your team.",
       name: "role",
       choices: ["Engineer", "Intern", "Done"]
     }
@@ -84,28 +91,55 @@ inquirer
     })
 }
 
+function addManager(){
+    console.log("Welcome to the teambuilding exercise, and congratulations on your managerial position! \n Please enter your information below.");
+    inquirer.prompt([namePrompt, idPrompt, emailPrompt, {
+        type: "input",
+        message: "Office number?",
+        name: "officeNumber"
+    }]).then( function(response){
+        team.push({
+            name: response.name,
+            id: response.id,
+            email: response.email,
+            officeNumber: response.officeNumber
+        });
+        recurringPrompt();
+    })
+    }
+
 function addEngineer(){
-inquirer.prompt([namePrompt, idPrompt, {
+inquirer.prompt([namePrompt, idPrompt, emailPrompt, {
     type: "input",
     message: "Github name?",
     name: "github"
 }]).then( function(response){
-    console.log("Engineer", response.name, response.id, response.github)
+    team.push({
+        name: response.name,
+        id: response.id,
+        email: response.email,
+        github: response.github
+    });
     recurringPrompt();
 })
 }
 
 function addIntern(){
-    inquirer.prompt([namePrompt, idPrompt, {
+    inquirer.prompt([namePrompt, idPrompt, emailPrompt, {
         type: "input",
         message: "School?",
         name: "school"
     }]).then( function(response){
-        console.log("Intern", response.name, response.id, response.school)
+        team.push({
+            name: response.name,
+            id: response.id,
+            email: response.email,
+            school: response.school
+        });
         recurringPrompt();
     })
 }
 
 function complete(){
-
+    console.log(team);
 }
