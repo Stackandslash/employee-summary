@@ -98,7 +98,7 @@ function addManager(){
         message: "Office number?",
         name: "officeNumber"
     }]).then( function(response){
-        team.push(new Manager(response.name, response.id, response.name, response.officeNumber));
+        team.push(new Manager(response.name, response.id, response.email, response.officeNumber));
         recurringPrompt();
     })
     }
@@ -109,7 +109,7 @@ inquirer.prompt([namePrompt, idPrompt, emailPrompt, {
     message: "Github name?",
     name: "github"
 }]).then( function(response){
-    team.push(new Engineer(response.name, response.id, response.name, response.github));
+    team.push(new Engineer(response.name, response.id, response.email, response.github));
     recurringPrompt();
 })
 }
@@ -120,14 +120,14 @@ function addIntern(){
         message: "School?",
         name: "school"
     }]).then( function(response){
-        team.push(new Intern(response.name, response.id, response.name, response.school));
+        team.push(new Intern(response.name, response.id, response.email, response.school));
         recurringPrompt();
     })
 }
 
 function complete(){
-    console.log(team);
-    //let testBo = team[0];
-    //console.log(testBo.getOfficeNumber());
-    console.log(render(team));
+    fs.writeFile(outputPath, render(team), function (err) {
+        if (err) return console.log(err);
+        console.log("You're all set! Happy managing!");
+      });
 }
