@@ -34,14 +34,6 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-
-// var adam = new Manager("AdamMan", 1, "ad@am.com", "101");
-// console.log(adam.getName(), adam.getId(), adam.getEmail(), adam.getOfficeNumber(), adam.getRole());
-// var bob = new Engineer("BobEngi", 7, "Bob@Bob.Bob", "TheGitHub");
-// console.log(bob.getName(), bob.getId(), bob.getEmail(), bob.getGithub(), bob.getRole());
-// var carl = new Intern("CarlInt", 100, "Carl@Carl.edu", "School of School");
-// console.log(carl.getName(), carl.getId(), carl.getEmail(), carl.getSchool(), carl.getRole());
-
 let team = [];
 let namePrompt = {
     type: "input",
@@ -61,7 +53,7 @@ let emailPrompt =
     name: "email"
 };
 
-addManager(); //This is our initial prompt, since each team needs one manager, and one only.
+addManager(); //This is our initial prompt, since each team needs one manager, and one only. Everything in this file is being hoisted right now. Seems like moving this to the bottom and renaming it init would be good, but not clear on that.
 
 
 
@@ -141,5 +133,14 @@ function addIntern(){
 }
 
 function complete(){
-    console.log(team);
+    var filtered = team.filter(employee => employee.getRole() === "Manager")
+    console.log(filtered);
 }
+    // let htmlFile = render(team);
+    // fs.writeFileSync(outputPath, htmlFile, function(err) {
+    //     if (err) {
+    //       return console.log(err);
+    //     }
+    //     console.log("Your file is complete! Happy managing!");
+    //   });
+    // }
