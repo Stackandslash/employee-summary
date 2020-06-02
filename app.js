@@ -34,6 +34,14 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
+
+// var adam = new Manager("AdamMan", 1, "ad@am.com", "101");
+// console.log(adam.getName(), adam.getId(), adam.getEmail(), adam.getOfficeNumber(), adam.getRole());
+// var bob = new Engineer("BobEngi", 7, "Bob@Bob.Bob", "TheGitHub");
+// console.log(bob.getName(), bob.getId(), bob.getEmail(), bob.getGithub(), bob.getRole());
+// var carl = new Intern("CarlInt", 100, "Carl@Carl.edu", "School of School");
+// console.log(carl.getName(), carl.getId(), carl.getEmail(), carl.getSchool(), carl.getRole());
+
 let team = [];
 let namePrompt = {
     type: "input",
@@ -53,7 +61,7 @@ let emailPrompt =
     name: "email"
 };
 
-addManager(); //This is our initial prompt, since each team needs one manager, and one only. Everything in this file is being hoisted right now. Seems like moving this to the bottom and renaming it init would be good, but not clear on that.
+addManager(); //This is our initial prompt, since each team needs one manager, and one only.
 
 
 
@@ -90,12 +98,7 @@ function addManager(){
         message: "Office number?",
         name: "officeNumber"
     }]).then( function(response){
-        team.push({
-            name: response.name,
-            id: response.id,
-            email: response.email,
-            officeNumber: response.officeNumber
-        });
+        team.push(new Manager(response.name, response.id, response.name, response.officeNumber));
         recurringPrompt();
     })
     }
@@ -106,12 +109,7 @@ inquirer.prompt([namePrompt, idPrompt, emailPrompt, {
     message: "Github name?",
     name: "github"
 }]).then( function(response){
-    team.push({
-        name: response.name,
-        id: response.id,
-        email: response.email,
-        github: response.github
-    });
+    team.push(new Engineer(response.name, response.id, response.name, response.github));
     recurringPrompt();
 })
 }
@@ -122,25 +120,14 @@ function addIntern(){
         message: "School?",
         name: "school"
     }]).then( function(response){
-        team.push({
-            name: response.name,
-            id: response.id,
-            email: response.email,
-            school: response.school
-        });
+        team.push(new Intern(response.name, response.id, response.name, response.school));
         recurringPrompt();
     })
 }
 
 function complete(){
-    var filtered = team.filter(employee => employee.getRole() === "Manager")
-    console.log(filtered);
+    console.log(team);
+    //let testBo = team[0];
+    //console.log(testBo.getOfficeNumber());
+    console.log(render(team));
 }
-    // let htmlFile = render(team);
-    // fs.writeFileSync(outputPath, htmlFile, function(err) {
-    //     if (err) {
-    //       return console.log(err);
-    //     }
-    //     console.log("Your file is complete! Happy managing!");
-    //   });
-    // }
