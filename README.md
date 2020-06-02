@@ -10,6 +10,7 @@ A generator for for creating a set of cards with team member details, using the 
 #### [Images](#images)
 #### [Tests](#tests)
 
+#### [Video Demo](https://drive.google.com/file/d/1ZWRNzoX7zOZPUuzXpWH7Gb-SCgHHjI38/view?usp=sharing) (also available in repo)
 
 ### Details
 This is a basic team card generator, made to create a set of cards for team members from terminal input. The displayed results are tweaked for color, content, and spacing, but largely determined by the existing htmlRender file. The functionality is brought by the library files for the Employee class and relevant subclasses, and the main app.js file.
