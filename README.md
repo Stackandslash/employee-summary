@@ -7,8 +7,7 @@ A generator for for creating a set of cards with team member details, using the 
 
 ## Table of Contents
 #### [Details](#details)
-#### [Images](#images)
-#### [Tests](#tests)
+#### [Issues](#issues)
 
 #### [Video Demo](https://drive.google.com/file/d/1ZWRNzoX7zOZPUuzXpWH7Gb-SCgHHjI38/view?usp=sharing) (also available in repo)
 
